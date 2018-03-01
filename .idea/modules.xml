@@ -4,7 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/basis-web-parent/basis-web/basis-web.iml" filepath="$PROJECT_DIR$/basis-web-parent/basis-web/basis-web.iml" />
       <module fileurl="file://$PROJECT_DIR$/basis-web-parent/basis-web-parent.iml" filepath="$PROJECT_DIR$/basis-web-parent/basis-web-parent.iml" />
-      <module fileurl="file://F:/miaosha_wp/miaosha/miaosha-partent.iml" filepath="F:/miaosha_wp/miaosha/miaosha-partent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/miaosha-demo/miaosha-demo.iml" filepath="$PROJECT_DIR$/miaosha-demo/miaosha-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/miaosha-demo/miaosha-demo-one/miaosha-demo-one.iml" filepath="$PROJECT_DIR$/miaosha-demo/miaosha-demo-one/miaosha-demo-one.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../miaosha-partent.iml" filepath="$PROJECT_DIR$/../miaosha-partent.iml" />
     </modules>
   </component>
 </project>

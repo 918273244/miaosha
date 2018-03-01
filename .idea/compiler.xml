@@ -7,11 +7,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="basis-web" />
+        <module name="miaosha-demo-one" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="basis-web" target="1.8" />
       <module name="basis-web-parent" target="1.8" />
+      <module name="miaosha-demo" target="1.8" />
+      <module name="miaosha-demo-one" target="1.8" />
+      <module name="miaosha-demo-two" target="1.8" />
       <module name="miaosha-partent" target="1.8" />
     </bytecodeTargetLevel>
   </component>

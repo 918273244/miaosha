@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>basis-web-parent</module>
+        <module>miaosha-demo</module>
     </modules>
 
     <parent>
