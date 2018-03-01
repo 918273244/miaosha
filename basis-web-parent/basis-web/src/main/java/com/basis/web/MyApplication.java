@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * spring-boot启动是
+ * spring-boot启动是s
  */
 @SpringBootApplication
 public class MyApplication  {
