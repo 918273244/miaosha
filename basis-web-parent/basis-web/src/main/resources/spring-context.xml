@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+        "
+>
+    <!-- 读取属性文件 -->
+    <!--<bean id="dataSourceConfig"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:jdbc.properties</value>
+            </list>
+        </property>
+    </bean>-->
+
+
+
+    <!--数据库读写分离 -->
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+          destroy-method="close" primary="true">
+        <!-- Connection Info -->
+        <property name="driverClassName" value="${jdbc.driverClassName}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+
+        <!-- Connection Pooling Info -->
+        <property name="maxTotal" value="50" />
+        <property name="defaultAutoCommit" value="false" />
+        <property name="timeBetweenEvictionRunsMillis" value="3600000" />
+        <property name="minEvictableIdleTimeMillis" value="3600000" />
+    </bean>
+    <bean id="readDataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+          destroy-method="close">
+        <!-- Connection Info -->
+        <property name="driverClassName" value="${jdbc.driverClassName}" />
+        <property name="url" value="${jdbc.read.url}" />
+        <property name="username" value="${jdbc.read.username}" />
+        <property name="password" value="${jdbc.read.password}" />
+
+        <!-- Connection Pooling Info -->
+        <property name="maxTotal" value="50" />
+        <property name="defaultAutoCommit" value="false" />
+        <property name="timeBetweenEvictionRunsMillis" value="3600000" />
+        <property name="minEvictableIdleTimeMillis" value="3600000" />
+    </bean>
+
+
+<!--配置读写数据库-->
+    <bean id="multipleDataSource" class="com.basis.web.config.mutidatasource.MultipleDataSource">
+        <property name="defaultTargetDataSource" ref="dataSource" />
+        <property name="targetDataSources">
+            <map>
+                <entry key="writeDataSource" value-ref="dataSource" />
+                <entry key="readDataSource" value-ref="readDataSource" />
+            </map>
+        </property>
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="multipleDataSource" />
+        <property name="configLocation" value="classpath:mybatis-configuration.xml" />
+        <property name="mapperLocations"
+                  value="classpath*:/mybatis/*Mapper.xml" />
+        <property name="typeAliasesPackage" value="com.basis.web.page" />
+    </bean>
+
+
+    <!--Mybatis mapper扫描 -->
+    <bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.basis.web.dao" />
+    </bean>
+
+    <!-- transaction manager, use JtaTransactionManager for global tx -->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="multipleDataSource" />
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <tx:advice id="txAdvice" transaction-manager="transactionManager" ></tx:advice>
+
+    <!--读写分离设置-->
+    <aop:config proxy-target-class="true" />
+    <bean id="dateSourceAspect" class="com.basis.web.config.mutidatasource.DateSourceAspect" />
+    <aop:config>
+        <!-- 只对业务逻辑层实施事务 -->
+        <aop:pointcut id="txPointcut" expression="execution(* com.basis.web.service..*.*(..))" />
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut" />
+
+        <!-- 通过AOP切面实现读/写库选择 -->
+        <aop:aspect order="-2147483648" ref="dateSourceAspect">
+            <aop:around pointcut-ref="txPointcut" method="determineReadOrWriteDB" />
+        </aop:aspect>
+    </aop:config>
+
+</beans>

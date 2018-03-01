@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/basis-web-parent/basis-web/basis-web.iml" filepath="$PROJECT_DIR$/basis-web-parent/basis-web/basis-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/basis-web-parent/basis-web-parent.iml" filepath="$PROJECT_DIR$/basis-web-parent/basis-web-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../miaosha-partent.iml" filepath="$PROJECT_DIR$/../miaosha-partent.iml" />
+    </modules>
+  </component>
+</project>

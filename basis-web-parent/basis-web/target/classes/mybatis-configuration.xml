@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<settings>
+		<!-- setting name="cacheEnable" value="true"/-->
+		<setting name="useGeneratedKeys" value="false"/>
+		<setting name="logImpl" value="LOG4J"/><!--增加mybatis日志-->
+	</settings>
+	<!-- 插件配置 -->
+	<plugins>
+		<plugin
+			interceptor="com.basis.web.config.mybatis.PageInterceptor">
+			<property name="dialectClass"
+				value="com.basis.web.config.mybatis.MySQLDialect" />
+				<!-- 这里设置过滤规则，不设置则默认过滤 sql ID 末尾带ByPage -->
+				<!-- <property name="interceptStr" value=""/> -->
+		</plugin>
+	</plugins>
+</configuration>

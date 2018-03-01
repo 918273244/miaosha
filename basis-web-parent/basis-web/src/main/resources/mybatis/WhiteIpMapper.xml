@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.basis.web.dao.WhiteIpMapper" >
+    <resultMap id="BaseResultMap" type="com.basis.web.model.WhiteIP" >
+        <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+        <result column="IP" property="ip" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        USER_NAME, IP
+    </sql>
+
+    <insert id="insert" parameterType="com.basis.web.model.WhiteIP" >
+        insert into white_ip (user_name,ip )values (#{userName}, #{ip})
+    </insert>
+
+
+    <delete id="deleteByName" parameterType="java.lang.String" >
+        delete from white_ip
+        where USER_NAME = #{username}
+    </delete>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from white_ip
+    </select>
+
+
+    <select id="findByPage" resultMap="BaseResultMap" parameterType="com.basis.web.page.WhiteIpPage">
+        select
+        <include refid="Base_Column_List" />
+        from white_ip
+        <where>
+            <if test="userName != null">
+                and USER_NAME = #{userName}
+            </if>
+
+        </where>
+
+
+        <if test="asc != null">
+            order by USER_NAME  ${asc}
+        </if>
+
+    </select>
+</mapper>
