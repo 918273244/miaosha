@@ -18,7 +18,7 @@ public class WhiteIpServiceImpl implements WhiteIpService {
     WhiteIpMapper whiteIpMapper;
 
     @Override
-    @DataSource(name = DataSource.master)
+    @DataSource(name = DataSource.slave)
     @Transactional
     public void insert(WhiteIP whiteIp)  {
         try {
