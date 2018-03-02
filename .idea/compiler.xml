@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="basis-web" />
         <module name="miaosha-demo-one" />
+        <module name="miaosha-demo-two" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

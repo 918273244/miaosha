@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/basis-web-parent/basis-web-parent.iml" filepath="$PROJECT_DIR$/basis-web-parent/basis-web-parent.iml" />
       <module fileurl="file://$PROJECT_DIR$/miaosha-demo/miaosha-demo.iml" filepath="$PROJECT_DIR$/miaosha-demo/miaosha-demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/miaosha-demo/miaosha-demo-one/miaosha-demo-one.iml" filepath="$PROJECT_DIR$/miaosha-demo/miaosha-demo-one/miaosha-demo-one.iml" />
+      <module fileurl="file://$PROJECT_DIR$/miaosha-demo/miaosha-demo-two/miaosha-demo-two.iml" filepath="$PROJECT_DIR$/miaosha-demo/miaosha-demo-two/miaosha-demo-two.iml" />
       <module fileurl="file://$PROJECT_DIR$/../miaosha-partent.iml" filepath="$PROJECT_DIR$/../miaosha-partent.iml" />
     </modules>
   </component>

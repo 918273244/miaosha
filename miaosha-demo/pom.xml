@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>miaosha-demo-one</module>
+        <module>miaosha-demo-two</module>
     </modules>
 
 
