@@ -14,6 +14,8 @@
     <modules>
         <module>miaosha-demo-one</module>
         <module>miaosha-demo-two</module>
+        <module>miaosha-demo-three</module>
+        <module>miaosha-demo-common</module>
     </modules>
 
 

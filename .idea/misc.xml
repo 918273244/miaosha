@@ -13,6 +13,7 @@
       <set>
         <option value="$PROJECT_DIR$/miaosha-demo-one/pom.xml" />
         <option value="$PROJECT_DIR$/miaosha-demo-two/pom.xml" />
+        <option value="$PROJECT_DIR$/miaosha-demo/pom.xml" />
       </set>
     </option>
   </component>
