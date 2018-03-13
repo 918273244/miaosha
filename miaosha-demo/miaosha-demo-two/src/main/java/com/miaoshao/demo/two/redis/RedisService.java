@@ -121,7 +121,7 @@ public class RedisService {
         }
     }
 
-    private <T> T StringToBean(String str, Class<T> clazz){
+    public static <T>  T StringToBean(String str, Class<T> clazz){
         if(str == null || str.length() <= 0 || clazz == null) {
             return null;
         }
