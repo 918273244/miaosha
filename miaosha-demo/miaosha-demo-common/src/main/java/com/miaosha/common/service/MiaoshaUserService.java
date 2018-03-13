@@ -11,5 +11,5 @@ public interface MiaoshaUserService {
 
     public MiaoshaUser getByToken(HttpServletResponse response, String token);
 
-    public boolean login(HttpServletResponse response, LoginVo loginVo);
+    public String login(HttpServletResponse response, LoginVo loginVo);
 }

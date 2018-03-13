@@ -11,4 +11,7 @@ public interface OrderService {
 
     public OrderInfo createOrder(MiaoshaUser user, GoodsVo goods);
 
+    public OrderInfo getOrderById(long orderId);
+
+    public void deleteOrders();
 }

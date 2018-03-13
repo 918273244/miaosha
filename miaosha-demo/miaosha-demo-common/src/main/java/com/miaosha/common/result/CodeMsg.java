@@ -23,6 +23,7 @@ public class CodeMsg {
 
 
     //订单模块
+    public static CodeMsg ORDER_NOT_EXIST = new CodeMsg(500400, "订单不存在");
 
 
     //秒杀模块

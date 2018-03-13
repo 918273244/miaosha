@@ -12,4 +12,6 @@ public interface GoodsService {
 
     public void reduceStock(GoodsVo goods);
 
+    void resetStocks(List<GoodsVo> goodsVoList);
+
 }
