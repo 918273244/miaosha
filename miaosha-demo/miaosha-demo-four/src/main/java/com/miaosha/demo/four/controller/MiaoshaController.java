@@ -122,7 +122,7 @@ public class MiaoshaController implements InitializingBean{
             return;
         }
         for(GoodsVo goods : goodsList) {
-            redisService.set(GoodsKey.getMiaoshaGoodsStock, ""+goods.getId(),goods.getStockCount());
+            redisService.set(GoodsKey.getMiaoshaGoodsStock, ""+goods.getId(), goods.getStockCount());
             localOverMap.put(goods.getId(), false);
         }
     }

@@ -31,8 +31,9 @@ public class GoodsServiceImpl implements GoodsService{
         goodsDao.reduceStock(g);
     }
 
+
     @Override
-    public void resetStock(List<GoodsVo> goodsVoList) {
+    public void resetStocks(List<GoodsVo> goodsVoList) {
         for(GoodsVo goods : goodsVoList ) {
             MiaoshaGoods g = new MiaoshaGoods();
             g.setGoodsId(goods.getId());

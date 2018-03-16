@@ -3,7 +3,9 @@ package com.miaosha.demo.four.controller;
 import com.miaosha.common.domain.MiaoshaUser;
 import com.miaosha.common.key.GoodsKey;
 import com.miaosha.common.redis.RedisService;
+import com.miaosha.common.result.Result;
 import com.miaosha.common.service.GoodsService;
+import com.miaosha.common.vo.GoodsDetailVo;
 import com.miaosha.common.vo.GoodsVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +38,14 @@ public class GoodsController {
     @Autowired
     ApplicationContext applicationContext;
 
+    /**
+     * qps：2900
+     * @param request
+     * @param response
+     * @param model
+     * @param user
+     * @return
+     */
     @RequestMapping(value = "/to_list", produces="text/html")
     @ResponseBody
     public String list(HttpServletRequest request, HttpServletResponse response, Model model, MiaoshaUser user){
@@ -123,6 +133,34 @@ public class GoodsController {
             redisService.set(GoodsKey.getGetGoodsDetail, ""+goodsId, html);
         }
         return html;
+    }
+
+    @RequestMapping(value="/detail/{goodsId}")
+    @ResponseBody
+    public Result<GoodsDetailVo> detail(HttpServletRequest request, HttpServletResponse response, Model model, MiaoshaUser user,
+                                        @PathVariable("goodsId")long goodsId) {
+        GoodsVo goods = goodsService.getGoodsVoByGoodsId(goodsId);
+        long startAt = goods.getStartDate().getTime();
+        long endAt = goods.getEndDate().getTime();
+        long now = System.currentTimeMillis();
+        int miaoshaStatus = 0;
+        int remainSeconds = 0;
+        if(now < startAt ) {//秒杀还没开始，倒计时
+            miaoshaStatus = 0;
+            remainSeconds = (int)((startAt - now )/1000);
+        }else  if(now > endAt){//秒杀已经结束
+            miaoshaStatus = 2;
+            remainSeconds = -1;
+        }else {//秒杀进行中
+            miaoshaStatus = 1;
+            remainSeconds = 0;
+        }
+        GoodsDetailVo vo = new GoodsDetailVo();
+        vo.setGoods(goods);
+        vo.setUser(user);
+        vo.setRemainSeconds(remainSeconds);
+        vo.setMiaoshaStatus(miaoshaStatus);
+        return Result.success(vo);
     }
 
 }
